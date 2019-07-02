@@ -6,3 +6,4 @@ Quickly create progressive web applications with:
 -   💅 Styled Components
 -   🙋🏽‍♀️ Reach Router
 -   🦉 Feather Icons
+-   ⌨️ Prop-types
