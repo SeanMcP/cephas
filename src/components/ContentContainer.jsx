@@ -12,13 +12,29 @@ const styles = css`
         margin-right: 1rem;
         width: initial;
     }
+
+    ${p =>
+        p.squash &&
+        css`
+            margin-bottom: 0;
+            margin-top: 0;
+        `}
 `
 
-function ContentContainer({ as = 'section', children, ...props }) {
+function ContentContainer({
+    as = 'section',
+    children,
+    squash = false,
+    ...props
+}) {
     const Element = styled[as]`
         ${styles}
     `
-    return <Element {...props}>{children}</Element>
+    return (
+        <Element {...props} squash={squash}>
+            {children}
+        </Element>
+    )
 }
 
 ContentContainer.propTypes = {
