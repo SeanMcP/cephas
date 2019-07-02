@@ -1,7 +1,6 @@
 import React from 'react'
 import { Link } from '@reach/router'
 import styled, { css } from 'styled-components'
-import ContentContainer from 'components/ContentContainer'
 import Icon from 'components/Icon'
 import APP from 'constants/app'
 
@@ -20,7 +19,7 @@ const Container = styled.div`
 const BackLink = styled(Link)`
     ${flexCenterCenter}
     height: 48px;
-    left: -1rem;
+    left: 0;
     position: absolute;
     top: 0;
     width: 48px;
@@ -38,16 +37,14 @@ function AppHeader({ backTo = '/' }) {
     const { pathname } = window.location
     return (
         <header>
-            <ContentContainer squash>
-                <Container>
-                    {pathname !== '/' && (
-                        <BackLink to={backTo}>
-                            <Icon icon="ChevronLeft" label="Back" />
-                        </BackLink>
-                    )}
-                    <HomeLink to="/">{APP.title}</HomeLink>
-                </Container>
-            </ContentContainer>
+            <Container>
+                {pathname !== '/' && (
+                    <BackLink to={backTo}>
+                        <Icon icon="ChevronLeft" label="Back" />
+                    </BackLink>
+                )}
+                <HomeLink to="/">{APP.title}</HomeLink>
+            </Container>
         </header>
     )
 }
