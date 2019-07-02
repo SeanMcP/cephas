@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import AppFooter from 'components/AppFooter'
-import { APP } from 'constants/index'
+import APP from 'constants/app'
 
 const Container = styled.div`
     display: flex;
