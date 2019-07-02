@@ -1,10 +1,13 @@
 import React from 'react'
 import StyleProvider from 'styles/StyleProvider'
+import ViewWrapper from 'components/ViewWrapper'
 
 function App() {
     return (
         <StyleProvider>
-            <div className="App">Hello from Cephas</div>
+            <ViewWrapper title="Home">
+                <div>Hello from Cephas</div>
+            </ViewWrapper>
         </StyleProvider>
     )
 }
