@@ -1,3 +1,4 @@
 export default {
-    background: 'white'
+    background: 'white',
+    max_width: '720px'
 }
