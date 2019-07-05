@@ -3,6 +3,7 @@ import { Link } from '@reach/router'
 import styled, { css } from 'styled-components'
 import Icon from 'components/Icon'
 import APP from 'constants/app'
+import _IconLink from 'components/IconLink'
 
 const flexCenterCenter = css`
     align-items: center;
@@ -33,6 +34,12 @@ const HomeLink = styled(Link)`
     }
 `
 
+const IconLink = styled(_IconLink)`
+    position: absolute;
+    right: 0;
+    top: 0;
+`
+
 function AppHeader({ backTo = '/' }) {
     const { pathname } = window.location
     return (
@@ -44,6 +51,7 @@ function AppHeader({ backTo = '/' }) {
                     </BackLink>
                 )}
                 <HomeLink to="/">{APP.title}</HomeLink>
+                <IconLink to="/settings" icon="Settings" label="App settings" />
             </Container>
         </header>
     )
