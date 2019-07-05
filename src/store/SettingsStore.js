@@ -5,23 +5,34 @@ import { settings as appSettings, version } from 'appSettings.json'
 const SettingsStore = React.createContext()
 
 export function SettingsProvider({ children }) {
-    let settings
-    while (!settings) {
-        const dataFromStorage = JSON.parse(localStorage.getItem(version))
-        if (dataFromStorage) {
-            settings = dataFromStorage
-            break
-        } else {
-            const dataToStore = {}
-            for (const title in appSettings) {
-                dataToStore[title] = appSettings[title].default
+    const [value, setValue] = React.useState(() => {
+        let dataFromStorage
+        while (!dataFromStorage) {
+            const readFromStorage = JSON.parse(localStorage.getItem(version))
+            if (readFromStorage) {
+                dataFromStorage = readFromStorage
+                break
+            } else {
+                const dataToStore = {}
+                for (const title in appSettings) {
+                    dataToStore[title] = appSettings[title].default
+                }
+                localStorage.setItem(version, JSON.stringify(dataToStore))
             }
-            localStorage.setItem(version, JSON.stringify(dataToStore))
+        }
+        return dataFromStorage
+    })
+    function setter(newValue) {
+        try {
+            localStorage.setItem(version, JSON.stringify(newValue))
+            const dataFromStorage = JSON.parse(localStorage.getItem(version))
+            setValue(dataFromStorage)
+        } catch (err) {
+            console.error('Error saving data to `localStorage`:', err)
         }
     }
-    console.log('settings', settings)
     return (
-        <SettingsStore.Provider value={settings}>
+        <SettingsStore.Provider value={[value, setter]}>
             {children}
         </SettingsStore.Provider>
     )
@@ -29,8 +40,8 @@ export function SettingsProvider({ children }) {
 
 export function useSettings() {
     const dataFromContext = React.useContext(SettingsStore)
-    function save(settings) {
-        localStorage.setItem(version, JSON.stringify(settings))
+    if (!dataFromContext) {
+        throw new Error('No data from `localStorage`')
     }
-    return [dataFromContext, save]
+    return dataFromContext
 }

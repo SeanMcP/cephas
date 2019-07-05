@@ -5,18 +5,26 @@ import { useSettings } from 'store/SettingsStore'
 import appSettings from 'appSettings.json'
 
 function SettingsView(props) {
-    const [settings, saveSettings] = useSettings()
+    const [settings, setSettings] = useSettings()
     const fields = []
     for (const field in appSettings.settings) {
         const current = appSettings.settings[field]
         fields.push(
             <label key={field}>
                 <span>{current.label}</span>
-                <input
-                    defaultValue={settings[field]}
-                    name={field}
-                    type="text"
-                />
+                {current.type === 'toggle' ? (
+                    <input
+                        defaultChecked={settings[field]}
+                        name={field}
+                        type="checkbox"
+                    />
+                ) : (
+                    <input
+                        defaultValue={settings[field]}
+                        name={field}
+                        type={current.type}
+                    />
+                )}
             </label>
         )
     }
@@ -25,10 +33,11 @@ function SettingsView(props) {
         const data = new FormData(e.target)
         const dataToStore = {}
         for (const pair of data.entries()) {
+            console.log(pair)
             const [key, value] = pair
-            dataToStore[key] = value
+            dataToStore[key] = value === 'on' ? true : value
         }
-        saveSettings(dataToStore)
+        setSettings(dataToStore)
     }
     return (
         <ViewWrapper title="Settings">
