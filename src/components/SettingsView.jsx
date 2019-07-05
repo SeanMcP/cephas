@@ -42,6 +42,8 @@ function SettingsView(props) {
     return (
         <ViewWrapper title="Settings">
             <ContentContainer>
+                <h1>Settings</h1>
+                <p>Change the settings for this application.</p>
                 <form onSubmit={handleSubmit}>
                     {fields}
                     {fields.length > 0 && <button>Save</button>}
