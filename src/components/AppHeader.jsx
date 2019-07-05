@@ -2,8 +2,9 @@ import React from 'react'
 import { Link } from '@reach/router'
 import styled, { css } from 'styled-components'
 import Icon from 'components/Icon'
-import APP from 'constants/app'
 import _IconLink from 'components/IconLink'
+import APP from 'constants/app'
+import PATH from 'constants/path'
 
 const flexCenterCenter = css`
     align-items: center;
@@ -40,18 +41,21 @@ const IconLink = styled(_IconLink)`
     top: 0;
 `
 
-function AppHeader({ backTo = '/' }) {
-    const { pathname } = window.location
+function AppHeader({ backTo = PATH.ROOT }) {
     return (
         <header>
             <Container>
-                {pathname !== '/' && (
+                {window.location.pathname !== PATH.ROOT && (
                     <BackLink to={backTo}>
                         <Icon icon="ChevronLeft" label="Back" />
                     </BackLink>
                 )}
-                <HomeLink to="/">{APP.title}</HomeLink>
-                <IconLink to="/settings" icon="Settings" label="App settings" />
+                <HomeLink to={PATH.ROOT}>{APP.title}</HomeLink>
+                <IconLink
+                    to={PATH.SETTINGS}
+                    icon="Settings"
+                    label="App settings"
+                />
             </Container>
         </header>
     )
