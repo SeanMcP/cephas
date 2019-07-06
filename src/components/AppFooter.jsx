@@ -1,6 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import ContentContainer from 'components/ContentContainer'
+import ExternalLink from './ExternalLink'
 
 const Footer = styled.footer`
     text-align: center;
@@ -12,13 +13,9 @@ function AppFooter() {
             <ContentContainer>
                 <p>
                     Made by{' '}
-                    <a
-                        href="https://seanmcp.com"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                    >
+                    <ExternalLink to="https://seanmcp.com">
                         SeanMcP
-                    </a>
+                    </ExternalLink>
                 </p>
             </ContentContainer>
         </Footer>
