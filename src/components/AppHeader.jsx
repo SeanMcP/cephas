@@ -1,10 +1,10 @@
 import React from 'react'
 import { Link } from '@reach/router'
 import styled, { css } from 'styled-components'
-import Icon from 'components/Icon'
 import _IconLink from 'components/IconLink'
 import APP from 'constants/app'
 import PATH from 'constants/path'
+import IconButton from './IconButton'
 
 const flexCenterCenter = css`
     align-items: center;
@@ -18,7 +18,7 @@ const Container = styled.div`
     position: relative;
 `
 
-const BackLink = styled(Link)`
+const BackButton = styled(IconButton)`
     ${flexCenterCenter}
     height: 48px;
     left: 0;
@@ -35,27 +35,32 @@ const HomeLink = styled(Link)`
     }
 `
 
-const IconLink = styled(_IconLink)`
+const SettingsIconLink = styled(_IconLink)`
     position: absolute;
     right: 0;
     top: 0;
 `
 
 function AppHeader({ backTo = PATH.ROOT }) {
+    const { pathname } = window.location
     return (
         <header>
             <Container>
-                {window.location.pathname !== PATH.ROOT && (
-                    <BackLink to={backTo}>
-                        <Icon icon="ChevronLeft" label="Back" />
-                    </BackLink>
+                {pathname !== PATH.ROOT && (
+                    <BackButton
+                        onClick={() => window.history.go(-1)}
+                        icon="ChevronLeft"
+                        label="Back"
+                    />
                 )}
                 <HomeLink to={PATH.ROOT}>{APP.title}</HomeLink>
-                <IconLink
-                    to={PATH.SETTINGS}
-                    icon="Settings"
-                    label="App settings"
-                />
+                {pathname !== PATH.SETTINGS && (
+                    <SettingsIconLink
+                        to={PATH.SETTINGS}
+                        icon="Settings"
+                        label="App settings"
+                    />
+                )}
             </Container>
         </header>
     )
