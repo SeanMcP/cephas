@@ -1,6 +1,6 @@
 import React from 'react'
 import ContentContainer from 'components/ContentContainer'
-import ViewWrapper from 'components/ViewWrapper'
+import ViewLayout from 'components/ViewContainer'
 import { useSettings } from 'store/SettingsStore'
 import appSettings from 'appSettings.json'
 
@@ -33,14 +33,13 @@ function SettingsView(props) {
         const data = new FormData(e.target)
         const dataToStore = {}
         for (const pair of data.entries()) {
-            console.log(pair)
             const [key, value] = pair
             dataToStore[key] = value === 'on' ? true : value
         }
         setSettings(dataToStore)
     }
     return (
-        <ViewWrapper title="Settings">
+        <ViewLayout title="Settings">
             <ContentContainer>
                 <h1>Settings</h1>
                 <p>Change the settings for this application.</p>
@@ -49,7 +48,7 @@ function SettingsView(props) {
                     {fields.length > 0 && <button>Save</button>}
                 </form>
             </ContentContainer>
-        </ViewWrapper>
+        </ViewLayout>
     )
 }
 

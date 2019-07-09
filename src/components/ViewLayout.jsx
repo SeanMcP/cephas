@@ -16,7 +16,7 @@ const Main = styled.main`
     overflow-y: auto;
 `
 
-function ViewWrapper({ backTo, children, title }) {
+function ViewLayout({ backTo, children, title }) {
     React.useEffect(() => {
         document.title = `${title} - ${APP.title}`
     }, [title])
@@ -31,8 +31,8 @@ function ViewWrapper({ backTo, children, title }) {
     )
 }
 
-ViewWrapper.propTypes = {
+ViewLayout.propTypes = {
     title: PropTypes.string.isRequired
 }
 
-export default ViewWrapper
+export default ViewLayout
