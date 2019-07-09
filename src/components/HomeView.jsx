@@ -1,6 +1,6 @@
 import React from 'react'
 import ContentContainer from 'components/ContentContainer'
-import ViewLayout from 'components/ViewContainer'
+import ViewLayout from 'components/ViewLayout'
 
 function HomeView(props) {
     return (
