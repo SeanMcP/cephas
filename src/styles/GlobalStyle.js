@@ -1,20 +1,11 @@
-import { createGlobalStyle } from 'styled-components'
+import { createGlobalStyle, css } from 'styled-components'
 
-export default createGlobalStyle`
-body {
-    color: ${p => p.theme.text};
-    margin: 0;
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-    font-size: 100%;
-    -webkit-font-smoothing: antialiased;
-	-moz-osx-font-smoothing: grayscale;
-}
-
-a {
+export const linkStyles = css`
     color: ${p => p.theme.primary};
     text-decoration: none;
 
-    &:hover, &:focus {
+    &:hover,
+    &:focus {
         filter: brightness(2);
     }
 
@@ -31,5 +22,19 @@ a {
     &:visited {
         filter: brightness(-2);
     }
+`
+
+export default createGlobalStyle`
+body {
+    color: ${p => p.theme.text};
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-size: 100%;
+    -webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+a {
+    ${linkStyles}
 }
 `
