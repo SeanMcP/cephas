@@ -11,12 +11,12 @@ function AppFooter() {
     return (
         <Footer>
             <ContentContainer>
-                <p>
+                <small>
                     Made by{' '}
                     <ExternalLink to="https://seanmcp.com">
                         SeanMcP
                     </ExternalLink>
-                </p>
+                </small>
             </ContentContainer>
         </Footer>
     )
