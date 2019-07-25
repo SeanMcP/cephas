@@ -2,9 +2,9 @@ import React from 'react'
 
 import { settings as appSettings, version } from 'appSettings.json'
 
-const SettingsStore = React.createContext()
+const SettingsStoreContext = React.createContext()
 
-export function SettingsProvider({ children }) {
+export function SettingsStoreProvider({ children }) {
     const [value, setValue] = React.useState(() => {
         let dataFromStorage
         while (!dataFromStorage) {
@@ -32,14 +32,14 @@ export function SettingsProvider({ children }) {
         }
     }
     return (
-        <SettingsStore.Provider value={[value, setter]}>
+        <SettingsStoreContext.Provider value={[value, setter]}>
             {children}
-        </SettingsStore.Provider>
+        </SettingsStoreContext.Provider>
     )
 }
 
 export function useSettings() {
-    const dataFromContext = React.useContext(SettingsStore)
+    const dataFromContext = React.useContext(SettingsStoreContext)
     if (!dataFromContext) {
         throw new Error('No data from `localStorage`')
     }
